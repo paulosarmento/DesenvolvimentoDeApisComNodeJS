@@ -106,6 +106,33 @@ class Database{
         // registra de novo na base de dados
         return await this.escreverArquivo(dados)
     }
+    async atualizar(id, modificacoes) {
+        //obter os dados 
+        const dados = await this.obterDadosArquivo()
+        // comparar se o id que ele passou é valido
+        const indice = dados.findIndex(item=> item.id == parseInt(id))
+        
+        // se o indice não existir
+        if(indice === -1) {
+            throw Error('O heroi informado não existe')
+        }
+
+        const atual = dados[indice]
+        // faz o merge dos dois objetos
+        const objetoAtualizar = {
+            ...atual,
+            ...modificacoes
+        }
+        // remove o objeto anterior da lista 
+        dados.splice(indice, 1)
+
+        // escreve de novo com o objeto atualizado 
+        return await this.escreverArquivo([
+            ...dados,
+            objetoAtualizar
+        ])
+
+    }
 }
 
 // exporta a instancia para não precisar ficar instanciando quando precisar usar para obter os objetos
