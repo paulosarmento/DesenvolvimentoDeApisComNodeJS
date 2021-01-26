@@ -19,9 +19,9 @@ describe('Suite de manipulação de Herois', () => {
         await database.cadastrar(DEFAULT_ITEM_CADASTRAR)
         await database.cadastrar(DEFAULT_ITEM_ATUALIZAR)
     })
-    after(async () => {
-        await database.remover()
-    })
+    // after(async () => {
+    //     await database.remover()
+    // })
     
 
     it('deve pesquisar um heroi usando arquivos', async () => {
